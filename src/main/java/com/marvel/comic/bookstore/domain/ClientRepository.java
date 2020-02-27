@@ -2,24 +2,16 @@ package com.marvel.comic.bookstore.domain;
 
 
 import com.marvel.comic.bookstore.model.Client;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.Optional;
 
-public class ClientRepository {
+public interface ClientRepository extends CrudRepository<Client, Long> {
 
-    public List<Client> getAllClients() {
-        return null;
-    }
+    List<Client> findByName(String name);
 
-    public void updateClient(Long id) {
-        return;
-    }
+    Client findById(long id);
 
-    public void createClient(Client client) {
-        return;
-    }
-
-    public void deleteClient() {
-        return;
-    }
+    List<Client> findAll();
 }

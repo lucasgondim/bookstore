@@ -1,9 +1,6 @@
 package com.marvel.comic.bookstore.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "client")
@@ -11,6 +8,7 @@ public class Client {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
     @Column(name = "name")
@@ -21,6 +19,14 @@ public class Client {
 
     @Column(name = "email")
     String email;
+
+    public Client() {}
+
+    public Client(String name, int age, String email) {
+        this.name = name;
+        this.age = age;
+        this.email = email;
+    }
 
     public Long getId() {
         return id;
