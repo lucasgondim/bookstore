@@ -12,6 +12,7 @@ public class BookstoreApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BookstoreApplication.class, args);
+		log.info("Hello from Log4j!!!!");
 	}
 
 	/*@Bean
