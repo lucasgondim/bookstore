@@ -1,8 +1,12 @@
 package com.marvel.comic.bookstore.controller;
 
+import com.marvel.comic.bookstore.BookstoreApplication;
 import com.marvel.comic.bookstore.domain.ClientRepository;
 import com.marvel.comic.bookstore.model.Client;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +24,9 @@ public class ClientController {
     @Autowired
     ClientRepository clientRepository;
 
+    private static final Logger log = LoggerFactory.getLogger(ClientController.class);
+
+    @Cacheable(cacheNames = "User", key = "#root.method.name")
     @GetMapping(path = "/users", produces = "application/json")
     public List<Client> getClients() {
         return clientRepository.findAll();

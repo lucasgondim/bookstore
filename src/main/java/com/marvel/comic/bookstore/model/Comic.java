@@ -1,10 +1,11 @@
 package com.marvel.comic.bookstore.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "comic")
-public class Comic {
+public class Comic implements Serializable {
 
     @Id
     @Column(name = "id")
