@@ -15,12 +15,13 @@ public class Utils {
             m = MessageDigest.getInstance("MD5");
             String s = ts+privateKey+apiKey;
             m.update((s).getBytes(), 0, s.length());
+
+            return new BigInteger(1,m.digest()).toString(16);
+
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-
-        return new BigInteger(1,m.digest()).toString(16);
-
+        return null;
     }
 
     public static String getComicUrl(Environment env) {

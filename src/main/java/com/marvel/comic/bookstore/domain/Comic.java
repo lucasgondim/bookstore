@@ -56,4 +56,5 @@ public class Comic implements Serializable {
                 ", description='" + description + '\'' +
                 '}';
     }
+
 }
