@@ -22,8 +22,6 @@ public class ComicController {
     @Autowired
     private ComicRepository comicRepository;
     
-    private RestTemplate restTemplate;
-
     @GetMapping(path = "/comics", produces = "application/json")
     public List<Comic> getComics() {
         return comicRepository.findAll();
@@ -32,6 +30,8 @@ public class ComicController {
     @GetMapping(path = "/save/comics", produces = "application/json")
     public ComicMarvel saveComics() {
         try {
+
+            RestTemplate restTemplate = new RestTemplate();
             ComicMarvel comicMarvel = restTemplate.getForObject(Utils.getComicUrl(env), ComicMarvel.class);
 
             for (Result result : comicMarvel.getData().getResults()) {
@@ -39,7 +39,7 @@ public class ComicController {
                 Comic comic = new Comic();
                 comic.setId(result.getId());
                 comic.setTitle(result.getTitle());
-                comic.setDescription((!result.getDescription().isBlank()) ? result.getDescription() : "");
+                comic.setDescription((result.getDescription() != null) ? result.getDescription() : "");
                 comicRepository.save(comic);
             }
 
