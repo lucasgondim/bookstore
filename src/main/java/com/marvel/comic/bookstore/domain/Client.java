@@ -1,4 +1,4 @@
-package com.marvel.comic.bookstore.model;
+package com.marvel.comic.bookstore.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,16 +10,16 @@ public class Client implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+    private Long id;
 
     @Column(name = "name")
-    String name;
+    private String name;
 
     @Column(name = "age")
-    int age;
+    private int age;
 
     @Column(name = "email")
-    String email;
+    private String email;
 
     public Client() {}
 
@@ -59,5 +59,15 @@ public class Client implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

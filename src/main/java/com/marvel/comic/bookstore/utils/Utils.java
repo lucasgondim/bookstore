@@ -8,12 +8,12 @@ import java.security.NoSuchAlgorithmException;
 
 public class Utils {
 
-    private static String getHashForMarvel(String ts, String privatekey, String apikey) {
+    private static String getHashForMarvel(String ts, String privateKey, String apiKey) {
 
         MessageDigest m = null;
         try {
             m = MessageDigest.getInstance("MD5");
-            String s = ts+privatekey+apikey;
+            String s = ts+privateKey+apiKey;
             m.update((s).getBytes(), 0, s.length());
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();

@@ -1,4 +1,4 @@
-package com.marvel.comic.bookstore.model;
+package com.marvel.comic.bookstore.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
