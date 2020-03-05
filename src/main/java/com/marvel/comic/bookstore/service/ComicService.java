@@ -16,11 +16,16 @@ import java.util.List;
 @Service
 public class ComicService {
 
-    @Autowired
     private Environment env;
+    private ComicRepository comicRepository;
+    private RestTemplate restTemplate;
 
     @Autowired
-    private ComicRepository comicRepository;
+    public ComicService(Environment env, ComicRepository comicRepository, RestTemplate restTemplate) {
+        this.env = env;
+        this.comicRepository = comicRepository;
+        this.restTemplate = restTemplate;
+    }
 
     public List<Comic> getComics() {
         return comicRepository.findAll();
@@ -31,8 +36,11 @@ public class ComicService {
 
             List<Comic> comics = new ArrayList<>();
 
-            RestTemplate restTemplate = new RestTemplate();
             ComicMarvel comicMarvel = restTemplate.getForObject(Utils.getComicUrl(env), ComicMarvel.class);
+
+            if(comicMarvel == null || comicMarvel.getData() == null || comicMarvel.getData().getResults() == null) {
+                throw new Exception("Erro na API da Marvel.");
+            }
 
             for (Result result : comicMarvel.getData().getResults()) {
 
@@ -40,7 +48,7 @@ public class ComicService {
                 comic.setId(result.getId());
                 comic.setTitle(result.getTitle());
                 comic.setDescription((result.getDescription() != null) ? result.getDescription() : "");
-                if(!ComicAlreadyExists(result.getId())) {
+                if(!comicAlreadyExists(result.getId())) {
                     Comic c = comicRepository.save(comic);
                     comics.add(c);
                 }
@@ -54,7 +62,7 @@ public class ComicService {
         return null;
     }
 
-    private boolean ComicAlreadyExists(Long id) {
+    private boolean comicAlreadyExists(Long id) {
         return comicRepository.existsById(id);
     }
 }

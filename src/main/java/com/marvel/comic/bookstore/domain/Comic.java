@@ -19,11 +19,6 @@ public class Comic implements Serializable {
 
     public Comic() {}
 
-    public Comic(String title, String description) {
-        this.title = title;
-        this.description = description;
-    }
-
     public Long getId() {
         return id;
     }
@@ -46,15 +41,6 @@ public class Comic implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    @Override
-    public String toString() {
-        return "Comic{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                '}';
     }
 
 }

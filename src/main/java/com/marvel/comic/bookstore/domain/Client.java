@@ -23,12 +23,6 @@ public class Client implements Serializable {
 
     public Client() {}
 
-    public Client(String name, int age, String email) {
-        this.name = name;
-        this.age = age;
-        this.email = email;
-    }
-
     public Long getId() {
         return id;
     }
@@ -61,13 +55,4 @@ public class Client implements Serializable {
         this.email = email;
     }
 
-    @Override
-    public String toString() {
-        return "Client{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", email='" + email + '\'' +
-                '}';
-    }
 }
